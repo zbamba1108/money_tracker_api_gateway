@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: money_tracker_api_gateway
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui/index.html
+  group-configs:
+    - group: data-api
+      paths-to-match: /data/**
