@@ -10,4 +10,8 @@ public class Constants {
     public static class Profile {
         public static final String DOCS = "docs";
     }
+
+    public static class Headers {
+        public static final String USER_ID = "User-ID";
+    }
 }
