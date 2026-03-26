@@ -27,10 +27,12 @@ public class DataServiceTokenFilter extends AbstractGatewayFilterFactory<DataSer
         return ((exchange, chain) -> {
             String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
-            if (authHeader == null /*&& authHeader.startsWith("Bearer ")*/) {
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                 return exchange.getResponse().setComplete();
             }
+
+            authHeader = authHeader.replace("Bearer ", "");
 
             try {
                 Claims claims = Jwts.parser()
