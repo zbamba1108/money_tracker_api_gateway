@@ -14,12 +14,10 @@ import org.springframework.web.server.ServerWebExchange;
 import java.util.Base64;
 
 @Component
-public class DefaultFilter extends AbstractGatewayFilterFactory<DefaultFilter.Config> {
-
-    public final String secret = "secretlongenoughtobearealsecretwithadditionalcharactershopingnowislongenough"; // TODO replace with ENV_VARIABLE
+public class DefaultFilter extends AbstractGatewayFilterFactory<Config> {
 
     public DefaultFilter() {
-        super(DefaultFilter.Config.class);
+        super(Config.class);
     }
 
     @Override
@@ -36,7 +34,7 @@ public class DefaultFilter extends AbstractGatewayFilterFactory<DefaultFilter.Co
 
             try {
                 Claims claims = Jwts.parser()
-                        .verifyWith(Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret)))
+                        .verifyWith(Keys.hmacShaKeyFor(Base64.getDecoder().decode(Constants.SECRET)))
                         .build()
                         .parseSignedClaims(authHeader)
                         .getPayload();
@@ -56,7 +54,4 @@ public class DefaultFilter extends AbstractGatewayFilterFactory<DefaultFilter.Co
         });
     }
 
-    public static class Config {
-        // can put configurable options here
-    }
 }

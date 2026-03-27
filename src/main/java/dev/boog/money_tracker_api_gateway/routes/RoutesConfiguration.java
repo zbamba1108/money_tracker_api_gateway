@@ -1,6 +1,6 @@
 package dev.boog.money_tracker_api_gateway.routes;
 
-import dev.boog.money_tracker_api_gateway.filters.DefaultFilter;
+import dev.boog.money_tracker_api_gateway.filters.*;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,7 @@ public class RoutesConfiguration {
                 .route("data-service", r -> r
                         .path("/data/**")
                         .filters(f -> f
-                                .filter(defaultFilter.apply(new DefaultFilter.Config()))
+                                .filter(defaultFilter.apply(new Config()))
                                 .rewritePath("/data/(?<path>.*)", "/api/data/${path}"))
                         .uri("http://localhost:8081"))
                 .build();
