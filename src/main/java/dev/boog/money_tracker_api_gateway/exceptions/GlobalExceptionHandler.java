@@ -1,19 +1,14 @@
 package dev.boog.money_tracker_api_gateway.exceptions;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
+import org.springframework.http.*;
+import org.springframework.web.bind.*;
+import org.springframework.web.bind.annotation.*;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     private static final Logger LOGGER = Logger.getLogger(GlobalExceptionHandler.class.getName());
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleArgumentNotValid(MethodArgumentNotValidException ex) {

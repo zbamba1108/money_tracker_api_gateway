@@ -12,3 +12,5 @@ springdoc:
   group-configs:
     - group: data-api
       paths-to-match: /data/**
+    - group: auth-api
+      paths-to-match: /authentication/**

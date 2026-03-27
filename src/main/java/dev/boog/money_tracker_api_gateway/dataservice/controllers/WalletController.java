@@ -1,25 +1,21 @@
 package dev.boog.money_tracker_api_gateway.dataservice.controllers;
 
-import dev.boog.money_tracker_api_gateway.dataservice.dtos.request.RequestWalletDto;
-import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.ResponseDto;
-import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.ResponseWalletDto;
-import dev.boog.money_tracker_api_gateway.exceptions.validations.Read;
-import dev.boog.money_tracker_api_gateway.exceptions.validations.Write;
-import dev.boog.money_tracker_api_gateway.utils.Constants;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.lang3.NotImplementedException;
-import org.springframework.context.annotation.Profile;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import dev.boog.money_tracker_api_gateway.dataservice.dtos.request.*;
+import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.*;
+import dev.boog.money_tracker_api_gateway.exceptions.validations.*;
+import dev.boog.money_tracker_api_gateway.utils.*;
+import io.swagger.v3.oas.annotations.*;
+import io.swagger.v3.oas.annotations.tags.*;
+import org.apache.commons.lang3.*;
+import org.springframework.context.annotation.*;
+import org.springframework.http.*;
+import org.springframework.validation.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
 
 @Profile(Constants.Profile.DOCS)
-@Tag( name = "Data API")
-@Tag( name = "Wallet API")
+@Tag( name = Constants.Tags.DATA_SERVICE)
+@Tag( name = Constants.Tags.WALLET_API)
 @RestController
 @RequestMapping("/data/wallets")
 public class WalletController {
@@ -32,7 +28,7 @@ public class WalletController {
                                                  description = "the input request")
                                          @RequestBody
                                          RequestWalletDto req) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(Constants.Messages.DOCS_METHOD);
     }
 
     @Operation(description = "search one or more wallets based on input request")
@@ -44,7 +40,7 @@ public class WalletController {
                                                               @RequestBody(required = false)
                                                               @Validated(Read.class)
                                                               RequestWalletDto req) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(Constants.Messages.DOCS_METHOD);
     }
 
     @Operation(description = "search one or more wallets based on input request, get the details of children")
@@ -56,7 +52,7 @@ public class WalletController {
                                                                   @RequestBody
                                                                   @Validated(Read.class)
                                                                   RequestWalletDto req) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(Constants.Messages.DOCS_METHOD);
     }
 
     @Operation(description = "update an existing wallet")
@@ -68,7 +64,7 @@ public class WalletController {
                                                     @RequestBody
                                                     @Validated(Write.class)
                                                     RequestWalletDto req) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(Constants.Messages.DOCS_METHOD);
     }
 
     @Operation(description = "delete an existing wallet")
@@ -78,7 +74,7 @@ public class WalletController {
                                                  name = "id",
                                                  description = "the id of object to be deleted")
                                          @PathVariable Long id) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(Constants.Messages.DOCS_METHOD);
     }
 
 }

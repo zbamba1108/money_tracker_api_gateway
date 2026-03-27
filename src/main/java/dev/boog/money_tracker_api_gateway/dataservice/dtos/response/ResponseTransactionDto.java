@@ -1,13 +1,9 @@
 package dev.boog.money_tracker_api_gateway.dataservice.dtos.response;
 
-import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.models.BaseDto;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
-import java.math.BigDecimal;
+import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.models.*;
+import java.math.*;
+import lombok.*;
+import lombok.experimental.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

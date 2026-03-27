@@ -1,9 +1,8 @@
 package dev.boog.money_tracker_api_gateway.dataservice.dtos.request;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.experimental.SuperBuilder;
-import lombok.extern.jackson.Jacksonized;
+import lombok.*;
+import lombok.experimental.*;
+import lombok.extern.jackson.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Getter

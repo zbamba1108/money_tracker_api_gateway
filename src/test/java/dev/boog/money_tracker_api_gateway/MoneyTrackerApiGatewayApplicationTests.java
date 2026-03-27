@@ -1,7 +1,7 @@
 package dev.boog.money_tracker_api_gateway;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.*;
+import org.springframework.boot.test.context.*;
 
 @SpringBootTest
 public class MoneyTrackerApiGatewayApplicationTests {

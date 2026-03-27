@@ -1,17 +1,14 @@
 package dev.boog.money_tracker_api_gateway.filters;
 
-import dev.boog.money_tracker_api_gateway.utils.Constants;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.cloud.gateway.filter.GatewayFilter;
-import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-import org.springframework.web.server.ServerWebExchange;
-
-import java.util.Base64;
+import dev.boog.money_tracker_api_gateway.utils.*;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.*;
+import java.util.*;
+import org.springframework.cloud.gateway.filter.*;
+import org.springframework.cloud.gateway.filter.factory.*;
+import org.springframework.http.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.server.*;
 
 @Component
 public class DefaultFilter extends AbstractGatewayFilterFactory<Config> {

@@ -1,10 +1,9 @@
 package dev.boog.money_tracker_api_gateway.dataservice.dtos.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.models.PageDto;
+import com.fasterxml.jackson.annotation.*;
+import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.models.*;
+import java.util.*;
 import lombok.*;
-
-import java.util.List;
 
 @Setter
 @Getter
