@@ -14,12 +14,12 @@ import org.springframework.web.server.ServerWebExchange;
 import java.util.Base64;
 
 @Component
-public class DataServiceTokenFilter extends AbstractGatewayFilterFactory<DataServiceTokenFilter.Config> {
+public class DefaultFilter extends AbstractGatewayFilterFactory<DefaultFilter.Config> {
 
     public final String secret = "secretlongenoughtobearealsecretwithadditionalcharactershopingnowislongenough"; // TODO replace with ENV_VARIABLE
 
-    public DataServiceTokenFilter() {
-        super(DataServiceTokenFilter.Config.class);
+    public DefaultFilter() {
+        super(DefaultFilter.Config.class);
     }
 
     @Override
@@ -27,12 +27,12 @@ public class DataServiceTokenFilter extends AbstractGatewayFilterFactory<DataSer
         return ((exchange, chain) -> {
             String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
-            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            if (authHeader == null || !authHeader.startsWith(Constants.Token.BEARER)) {
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                 return exchange.getResponse().setComplete();
             }
 
-            authHeader = authHeader.replace("Bearer ", "");
+            authHeader = authHeader.substring(Constants.Token.BEARER.length());
 
             try {
                 Claims claims = Jwts.parser()

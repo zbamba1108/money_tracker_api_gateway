@@ -1,6 +1,6 @@
 package dev.boog.money_tracker_api_gateway.routes;
 
-import dev.boog.money_tracker_api_gateway.filters.DataServiceTokenFilter;
+import dev.boog.money_tracker_api_gateway.filters.DefaultFilter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RoutesConfiguration {
 
-    private final DataServiceTokenFilter dataServiceTokenFilter;
+    private final DefaultFilter defaultFilter;
 
-    public RoutesConfiguration(DataServiceTokenFilter dataServiceTokenFilter) {
-        this.dataServiceTokenFilter = dataServiceTokenFilter;
+    public RoutesConfiguration(DefaultFilter defaultFilter) {
+        this.defaultFilter = defaultFilter;
     }
 
     @Bean
@@ -21,7 +21,7 @@ public class RoutesConfiguration {
                 .route("data-service", r -> r
                         .path("/data/**")
                         .filters(f -> f
-                                .filter(dataServiceTokenFilter.apply(new DataServiceTokenFilter.Config()))
+                                .filter(defaultFilter.apply(new DefaultFilter.Config()))
                                 .rewritePath("/data/(?<path>.*)", "/api/data/${path}"))
                         .uri("http://localhost:8081"))
                 .build();

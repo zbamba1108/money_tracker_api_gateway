@@ -14,4 +14,8 @@ public class Constants {
     public static class Headers {
         public static final String USER_ID = "User-ID";
     }
+
+    public static class Token {
+        public static final String BEARER = "Bearer ";
+    }
 }
