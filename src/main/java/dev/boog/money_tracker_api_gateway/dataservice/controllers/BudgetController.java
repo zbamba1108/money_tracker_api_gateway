@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Profile(Constants.Profile.DOCS)
+@Tag( name = "Data API")
 @Tag( name = "Budget API")
 @RestController
 @RequestMapping("/data/budgets")
