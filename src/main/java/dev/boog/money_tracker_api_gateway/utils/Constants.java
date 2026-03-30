@@ -27,7 +27,7 @@ public class Constants {
         public static final String DATA_SERVICE = "data-service";
         public static final String AUTH_SERVICE_BASE_PATH = "/authentication";
         public static final String DATA_SERVICE_BASE_PATH = "/data";
-        public static final String AUTH_SERVICE_REDIRECT_BASE_PATH = "/api/auth/";
+        public static final String AUTH_SERVICE_REDIRECT_BASE_PATH = "/api/";
         public static final String DATA_SERVICE_REDIRECT_BASE_PATH = "/api/data/";
     }
 
