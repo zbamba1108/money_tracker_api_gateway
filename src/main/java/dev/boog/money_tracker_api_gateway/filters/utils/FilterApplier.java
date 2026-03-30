@@ -4,6 +4,7 @@ import dev.boog.money_tracker_api_gateway.filters.Config;
 import dev.boog.money_tracker_api_gateway.filters.DefaultFilter;
 import dev.boog.money_tracker_api_gateway.utils.Constants;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -22,34 +23,38 @@ public final class FilterApplier {
         throw new RuntimeException(Constants.Messages.UTILITY_CLASS);
     }
 
+    private static final JwtParser jwtParser = Jwts.parser()
+            .verifyWith(Keys.hmacShaKeyFor(Base64.getDecoder().decode(Constants.Secrets.CLIENT)))
+            .build();
+
     public static Mono<Void> validateAndExtractUserId(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        return Mono.defer(() -> {
+            String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
-        if (authHeader == null || !authHeader.startsWith(Constants.Tokens.BEARER)) {
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return exchange.getResponse().setComplete();
-        }
+            if (authHeader == null || !authHeader.startsWith(Constants.Tokens.BEARER)) {
+                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                return exchange.getResponse().setComplete();
+            }
 
-        authHeader = authHeader.substring(Constants.Tokens.BEARER.length());
+            authHeader = authHeader.substring(Constants.Tokens.BEARER.length());
 
-        try {
-            Claims claims = Jwts.parser()
-                    .verifyWith(Keys.hmacShaKeyFor(Base64.getDecoder().decode(Constants.Secrets.CLIENT)))
-                    .build()
-                    .parseSignedClaims(authHeader)
-                    .getPayload();
+            try {
+                Claims claims = jwtParser
+                        .parseSignedClaims(authHeader)
+                        .getPayload();
 
-            String userId = claims.getSubject();
+                String userId = claims.getSubject();
 
-            ServerWebExchange mutatedExchange = exchange.mutate()
-                    .request(r -> r.header(Constants.Headers.USER_ID, userId))
-                    .build();
+                ServerWebExchange mutatedExchange = exchange.mutate()
+                        .request(r -> r.header(Constants.Headers.USER_ID, userId))
+                        .build();
 
-            return chain.filter(mutatedExchange);
+                return chain.filter(mutatedExchange);
 
-        } catch (Exception e) {
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return exchange.getResponse().setComplete();
-        }
+            } catch (Exception e) {
+                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                return exchange.getResponse().setComplete();
+            }
+        });
     }
 }

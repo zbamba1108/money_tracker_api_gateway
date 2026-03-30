@@ -14,19 +14,22 @@ public class AuthFilter extends AbstractGatewayFilterFactory<Config> {
         super(Config.class);
     }
 
+    private final static String USERS_PATH = Constants.Services.AUTH_SERVICE_BASE_PATH + "/users";
+    private final static String LOGOUT_PATH = Constants.Services.AUTH_SERVICE_BASE_PATH + "/auth/logout";
+
     @Override
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
             HttpMethod httpMethod = exchange.getRequest().getMethod();
             String path =  exchange.getRequest().getURI().getPath();
 
-            if (HttpMethod.DELETE.name().matches(httpMethod.name()) && path.equals(Constants.Services.AUTH_SERVICE_BASE_PATH + "/users")) {
-                return FilterApplier.validateAndExtractUserId(exchange, chain);
-            } else if (HttpMethod.POST.name().equals(httpMethod.name()) && path.equals(Constants.Services.AUTH_SERVICE_BASE_PATH + "/auth/logout")) {
-                return FilterApplier.validateAndExtractUserId(exchange, chain);
-            }
+            boolean needsValidationAndUserIdMapping =
+                    (HttpMethod.DELETE.equals(httpMethod) && path.equals(USERS_PATH))
+                    || (HttpMethod.POST.equals(httpMethod) && path.equals(LOGOUT_PATH));
 
-            return chain.filter(exchange);
+            return needsValidationAndUserIdMapping ?
+                    FilterApplier.validateAndExtractUserId(exchange, chain)
+                    : chain.filter(exchange);
         });
     }
 
