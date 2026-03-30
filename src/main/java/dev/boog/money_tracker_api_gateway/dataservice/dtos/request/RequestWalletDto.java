@@ -1,10 +1,11 @@
 package dev.boog.money_tracker_api_gateway.dataservice.dtos.request;
 
-import dev.boog.money_tracker_api_gateway.exceptions.validations.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
-import lombok.experimental.*;
-import lombok.extern.jackson.*;
+import dev.boog.money_tracker_api_gateway.exceptions.validations.Write;
+import jakarta.validation.constraints.NotBlank;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.experimental.SuperBuilder;
+import lombok.extern.jackson.Jacksonized;
 
 @EqualsAndHashCode(callSuper = true)
 @Getter

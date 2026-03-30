@@ -1,12 +1,13 @@
 package dev.boog.money_tracker_api_gateway.routes;
 
-import dev.boog.money_tracker_api_gateway.filters.*;
-import dev.boog.money_tracker_api_gateway.filters.utils.FilterApplier;
+import dev.boog.money_tracker_api_gateway.filters.AuthFilter;
+import dev.boog.money_tracker_api_gateway.filters.Config;
+import dev.boog.money_tracker_api_gateway.filters.DefaultFilter;
 import dev.boog.money_tracker_api_gateway.utils.Constants;
-import org.springframework.cloud.gateway.route.*;
-import org.springframework.cloud.gateway.route.builder.*;
-import org.springframework.context.annotation.*;
-import org.springframework.http.HttpMethod;
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RoutesConfiguration {

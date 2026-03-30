@@ -1,13 +1,16 @@
 package dev.boog.money_tracker_api_gateway.authservice.controllers;
 
-import dev.boog.money_tracker_api_gateway.authservice.dto.request.*;
-import dev.boog.money_tracker_api_gateway.authservice.dto.response.*;
-import dev.boog.money_tracker_api_gateway.utils.*;
-import io.swagger.v3.oas.annotations.tags.*;
-import jakarta.validation.*;
-import org.apache.commons.lang3.*;
-import org.springframework.context.annotation.*;
-import org.springframework.http.*;
+import dev.boog.money_tracker_api_gateway.authservice.dto.request.LoginRequest;
+import dev.boog.money_tracker_api_gateway.authservice.dto.request.UserRequest;
+import dev.boog.money_tracker_api_gateway.authservice.dto.response.LoginResponse;
+import dev.boog.money_tracker_api_gateway.authservice.dto.response.RefreshResponse;
+import dev.boog.money_tracker_api_gateway.utils.Constants;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import org.apache.commons.lang3.NotImplementedException;
+import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Profile({Constants.Profile.DOCS})

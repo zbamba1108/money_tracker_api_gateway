@@ -1,6 +1,8 @@
 package dev.boog.money_tracker_api_gateway.exceptions.validations;
 
-import jakarta.validation.*;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+
 import java.lang.annotation.*;
 
 @Target({ElementType.TYPE})

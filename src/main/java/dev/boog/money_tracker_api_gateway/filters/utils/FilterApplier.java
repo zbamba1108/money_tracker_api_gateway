@@ -1,16 +1,12 @@
 package dev.boog.money_tracker_api_gateway.filters.utils;
 
-import dev.boog.money_tracker_api_gateway.filters.Config;
-import dev.boog.money_tracker_api_gateway.filters.DefaultFilter;
 import dev.boog.money_tracker_api_gateway.utils.Constants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
-import org.springframework.cloud.gateway.route.builder.GatewayFilterSpec;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;

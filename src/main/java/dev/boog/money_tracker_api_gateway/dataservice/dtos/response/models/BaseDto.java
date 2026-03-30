@@ -1,7 +1,9 @@
 package dev.boog.money_tracker_api_gateway.dataservice.dtos.response.models;
 
-import lombok.*;
-import lombok.experimental.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder

@@ -2,8 +2,8 @@ package dev.boog.money_tracker_api_gateway.authservice.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
-import org.hibernate.validator.constraints.*;
+import lombok.Builder;
+import org.hibernate.validator.constraints.Length;
 
 @Builder
 public record UserRequest(
