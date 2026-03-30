@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag( name = Constants.Tags.DATA_SERVICE)
 @Tag( name = Constants.Tags.TRANSACTION_API)
 @RestController
-@RequestMapping("/data/transactions")
+@RequestMapping(Constants.Services.DATA_SERVICE_BASE_PATH + "/transactions")
 public class TransactionController {
 
     @Operation(description = "create a new transaction")

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag( name = Constants.Tags.DATA_SERVICE)
 @Tag( name = Constants.Tags.WALLET_API)
 @RestController
-@RequestMapping("/data/wallets")
+@RequestMapping(Constants.Services.DATA_SERVICE_BASE_PATH + "/wallets")
 public class WalletController {
 
     @Operation(description = "create a new wallet")

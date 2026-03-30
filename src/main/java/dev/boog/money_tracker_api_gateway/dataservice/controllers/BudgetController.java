@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag( name = Constants.Tags.DATA_SERVICE)
 @Tag( name = Constants.Tags.BUDGET_API)
 @RestController
-@RequestMapping("/data/budgets")
+@RequestMapping(Constants.Services.DATA_SERVICE_BASE_PATH + "/budgets")
 public class BudgetController {
 
     @Operation(description = "create a new budget")
