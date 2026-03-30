@@ -1,33 +1,44 @@
 package dev.boog.money_tracker_api_gateway.routes;
 
 import dev.boog.money_tracker_api_gateway.filters.*;
+import dev.boog.money_tracker_api_gateway.filters.utils.FilterApplier;
+import dev.boog.money_tracker_api_gateway.utils.Constants;
 import org.springframework.cloud.gateway.route.*;
 import org.springframework.cloud.gateway.route.builder.*;
 import org.springframework.context.annotation.*;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 public class RoutesConfiguration {
 
     private final DefaultFilter defaultFilter;
 
-    public RoutesConfiguration(DefaultFilter defaultFilter) {
+    private final AuthFilter authFilter;
+
+    public RoutesConfiguration(DefaultFilter defaultFilter, AuthFilter authFilter) {
         this.defaultFilter = defaultFilter;
+        this.authFilter = authFilter;
     }
 
     @Bean
     public RouteLocator myRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("data-service", r -> r
-                        .path("/data/**")
+                .route(Constants.Services.DATA_SERVICE, r -> r
+                        .path(Constants.Services.DATA_SERVICE_BASE_PATH + "/**")
                         .filters(f -> f
                                 .filter(defaultFilter.apply(new Config()))
-                                .rewritePath("/data/(?<path>.*)", "/api/data/${path}"))
-                        .uri("http://localhost:8081"))
-                .route("auth-service", r -> r
-                        .path("/authentication/**")
+                                .rewritePath(Constants.Services.DATA_SERVICE_BASE_PATH + "/(?<path>.*)",
+                                        Constants.Services.DATA_SERVICE_REDIRECT_BASE_PATH + "${path}")
+                                .addRequestHeader(Constants.Headers.API_KEY, Constants.Secrets.INTERNAL))
+                        .uri(Constants.Hosts.DATA_SERVICE_HOST))
+                .route(Constants.Services.AUTH_SERVICE, r -> r
+                        .path(Constants.Services.AUTH_SERVICE_BASE_PATH + "/**")
                         .filters(f -> f
-                                .rewritePath("/authentication/(?<path>.*)", "/api/${path}"))
-                        .uri("http://localhost:8082"))
+                                .filter(authFilter.apply(new Config()))
+                                .rewritePath(Constants.Services.AUTH_SERVICE_BASE_PATH + "/(?<path>.*)",
+                                        Constants.Services.AUTH_SERVICE_REDIRECT_BASE_PATH + "${path}")
+                                .addRequestHeader(Constants.Headers.API_KEY, Constants.Secrets.INTERNAL))
+                        .uri(Constants.Hosts.AUTH_SERVICE_HOST))
                 .build();
     }
 }
