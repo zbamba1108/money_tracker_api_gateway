@@ -4,6 +4,7 @@ import dev.boog.money_tracker_api_gateway.dataservice.dtos.request.RequestWallet
 import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.ResponseDto;
 import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.ResponseWalletDto;
 import dev.boog.money_tracker_api_gateway.exceptions.validations.Read;
+import dev.boog.money_tracker_api_gateway.exceptions.validations.Update;
 import dev.boog.money_tracker_api_gateway.exceptions.validations.Write;
 import dev.boog.money_tracker_api_gateway.utils.Constants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -60,13 +61,14 @@ public class WalletController {
     }
 
     @Operation(description = "update an existing wallet")
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<ResponseWalletDto> update(@RequestHeader(HttpHeaders.AUTHORIZATION) String token,
+                                                    @PathVariable Long id,
                                                     @Parameter(
                                                             name = "request",
                                                             description = "the input request")
                                                     @RequestBody
-                                                    @Validated(Write.class)
+                                                    @Validated(Update.class)
                                                     RequestWalletDto req) {
         throw new NotImplementedException(Constants.Messages.DOCS_METHOD);
     }

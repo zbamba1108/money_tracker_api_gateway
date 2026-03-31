@@ -4,6 +4,7 @@ import dev.boog.money_tracker_api_gateway.dataservice.dtos.request.RequestBudget
 import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.ResponseBudgetDto;
 import dev.boog.money_tracker_api_gateway.dataservice.dtos.response.ResponseDto;
 import dev.boog.money_tracker_api_gateway.exceptions.validations.Read;
+import dev.boog.money_tracker_api_gateway.exceptions.validations.Update;
 import dev.boog.money_tracker_api_gateway.exceptions.validations.Write;
 import dev.boog.money_tracker_api_gateway.utils.Constants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,10 +43,11 @@ public class BudgetController {
     }
 
     @Operation(description = "update an existing budget")
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<ResponseBudgetDto> update(@RequestHeader(HttpHeaders.AUTHORIZATION) String token,
+                                                    @PathVariable Long id,
                                                     @RequestBody
-                                                    @Validated(Write.class)
+                                                    @Validated(Update.class)
                                                     RequestBudgetDto dto) {
         throw new NotImplementedException(Constants.Messages.DOCS_METHOD);
     }
